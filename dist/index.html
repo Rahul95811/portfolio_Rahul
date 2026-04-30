@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kilaparthi Rahul | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #050816;
+        color: #e0e0e0;
+        overflow-x: hidden;
+      }
+      .font-orbitron {
+        font-family: 'Orbitron', sans-serif;
+      }
+      .glass-effect {
+        background: rgba(23, 28, 56, 0.4);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(119, 78, 213, 0.2);
+      }
+      .neon-text-cyan {
+        text-shadow: 0 0 5px rgba(0, 255, 255, 0.7), 0 0 10px rgba(0, 255, 255, 0.5), 0 0 15px rgba(0, 255, 255, 0.3);
+      }
+      .neon-text-purple {
+        text-shadow: 0 0 5px rgba(191, 0, 255, 0.7), 0 0 10px rgba(191, 0, 255, 0.5), 0 0 15px rgba(191, 0, 255, 0.3);
+      }
+      .neon-box-shadow {
+        box-shadow: 0 0 10px 2px rgba(0, 255, 255, 0.3), 0 0 20px 5px rgba(191, 0, 255, 0.2), inset 0 0 5px 1px rgba(0, 255, 255, 0.2);
+      }
+      .btn-glow:hover {
+        box-shadow: 0 0 15px 5px rgba(0, 255, 255, 0.4), 0 0 25px 10px rgba(191, 0, 255, 0.3);
+      }
+      /* Success Animation Styles */
+      .checkmark {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        display: block;
+        stroke-width: 3;
+        stroke: #4ade80; /* Tailwind green-400 */
+        stroke-miterlimit: 10;
+        margin: 0 auto;
+        box-shadow: inset 0px 0px 0px #4ade80;
+        animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+      }
+
+      .checkmark__circle {
+        stroke-dasharray: 166;
+        stroke-dashoffset: 166;
+        stroke-width: 3;
+        stroke-miterlimit: 10;
+        stroke: #4ade80;
+        fill: none;
+        animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+      }
+
+      .checkmark__check {
+        transform-origin: 50% 50%;
+        stroke-dasharray: 48;
+        stroke-dashoffset: 48;
+        animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+      }
+
+      @keyframes stroke {
+        100% {
+          stroke-dashoffset: 0;
+        }
+      }
+
+      @keyframes scale {
+        0%, 100% {
+          transform: none;
+        }
+        50% {
+          transform: scale3d(1.1, 1.1, 1);
+        }
+      }
+
+      @keyframes fill {
+        100% {
+          box-shadow: inset 0px 0px 0px 40px #4ade80;
+        }
+      }
+    </style>
+
+  <script type="module" crossorigin src="/portfolio-kilaparthi-rahul/assets/index-DUFxKcTf.js"></script>
+</head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
