@@ -1,6 +1,4 @@
-
 import React from 'react';
-import useIntersectionObserver from '../hooks/useIntersectionObserver';
 import { CertificateIcon } from './Icons';
 
 interface Certification {
@@ -28,56 +26,67 @@ const certificationsData: Certification[] = [
     { title: 'Cybersecurity', issuer: 'Teachnook', date: 'Sep 2024', credentialUrl: linkedInCertUrl },
 ];
 
-const CertificationCard: React.FC<{ cert: Certification, index: number }> = ({ cert, index }) => {
-    const [ref, isVisible] = useIntersectionObserver<HTMLDivElement>({ threshold: 0.1 });
+const CertificationCard: React.FC<{ cert: Certification }> = ({ cert }) => {
     return (
         <div 
-            ref={ref}
-            className={`glass-effect p-6 rounded-xl border border-purple-500/30 transition-all duration-500 ease-out flex flex-col h-full ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
-            style={{transitionDelay: `${index * 100}ms`}}
+            className="card"
+            style={{
+                display: 'flex',
+                flexDirection: 'column',
+                height: '100%',
+                padding: '1.5rem',
+                border: '1px solid var(--color-border)',
+                transition: 'all var(--transition-normal)'
+            }}
         >
-            <div className="flex items-start gap-4">
-                <span className="text-cyan-400 mt-1"><CertificateIcon className="w-8 h-8"/></span>
-                <div>
-                    <h3 className="text-xl font-bold text-white mb-1">{cert.title}</h3>
-                    <p className="text-purple-400 font-semibold">{cert.issuer}</p>
-                    <p className="text-gray-400 text-sm">{cert.date}</p>
+            <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
+                <div style={{ background: 'rgba(124, 58, 237, 0.08)', color: 'var(--color-accent)', width: '40px', height: '40px', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <CertificateIcon className="w-5 h-5"/>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                    <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--text-main)', margin: 0, fontFamily: 'var(--font-heading)', lineHeight: 1.3 }}>
+                        {cert.title}
+                    </h3>
+                    <span style={{ fontSize: '0.85rem', color: 'var(--color-primary)', fontWeight: 600 }}>
+                        {cert.issuer}
+                    </span>
+                    <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+                        {cert.date}
+                    </span>
                 </div>
             </div>
-            <div className="mt-auto pt-6">
-                 {cert.credentialUrl && (
+            {cert.credentialUrl && (
+                <div style={{ marginTop: 'auto', paddingTop: '1.25rem' }}>
                     <a
                         href={cert.credentialUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="btn-glow inline-flex items-center gap-2 font-orbitron text-sm font-bold px-5 py-2 border-2 border-cyan-400/80 text-cyan-400 rounded-full transition-all duration-150 hover:bg-cyan-400 hover:text-black hover:scale-105 active:scale-95"
+                        className="btn btn-outline w-full"
+                        style={{ padding: '0.45rem 1rem', fontSize: '0.8rem', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem' }}
                     >
-                        Show Credential
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        Verify Credential
+                        <svg xmlns="http://www.w3.org/2000/svg" style={{ width: '12px', height: '12px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                           <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                         </svg>
                     </a>
-                )}
-            </div>
+                </div>
+            )}
         </div>
-    )
-}
-
+    );
+};
 
 const Certifications: React.FC = () => {
-    const [ref, isVisible] = useIntersectionObserver<HTMLHeadingElement>({ threshold: 0.1 });
     return (
-        <section className="py-20 bg-black bg-opacity-20">
-            <div className="container mx-auto px-6">
-                <h2 ref={ref} className={`font-orbitron text-4xl md-text-5xl font-bold text-center mb-16 transition-opacity duration-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-                    <span className="text-purple-500 neon-text-purple">{'<'}</span>
-                    Certifications
-                    <span className="text-purple-500 neon-text-purple">{'/>'}</span>
-                </h2>
+        <section className="section" id="certifications" style={{ backgroundColor: 'var(--bg-primary)' }}>
+            <div className="container">
+                <div className="section-title">
+                    <h2>Professional Certifications</h2>
+                    <p className="section-subtitle">A collection of industry-recognized credentials reflecting specialized knowledge in security & development.</p>
+                </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md-grid-cols-2 grid-cols-3" style={{ gap: '1.5rem' }}>
                     {certificationsData.map((cert, index) => (
-                        <CertificationCard key={index} cert={cert} index={index} />
+                        <CertificationCard key={index} cert={cert} />
                     ))}
                 </div>
             </div>
@@ -85,4 +94,4 @@ const Certifications: React.FC = () => {
     );
 };
 
-export default React.memo(Certifications);
+export default Certifications;

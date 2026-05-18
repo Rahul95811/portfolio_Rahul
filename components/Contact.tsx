@@ -1,62 +1,87 @@
 import React from 'react';
-import useIntersectionObserver from '../hooks/useIntersectionObserver';
 import { MailIcon, LinkedInIcon, GitHubIcon } from './Icons';
 
-interface ContactLinkProps {
+interface ContactLink {
     href: string;
     icon: React.ReactNode;
     text: string;
-    delay: string;
+    color: string;
+    bg: string;
 }
 
-const ContactButton: React.FC<ContactLinkProps> = ({ href, icon, text, delay }) => {
-    const [ref, isVisible] = useIntersectionObserver<HTMLAnchorElement>({ threshold: 0.2 });
+const ContactButton: React.FC<ContactLink> = ({ href, icon, text, color, bg }) => {
     return (
         <a
-            ref={ref}
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            style={{ transitionDelay: delay }}
-            className={`group btn-glow w-full md:w-auto flex items-center justify-center gap-3 font-orbitron text-lg font-bold px-8 py-4 border-2 border-cyan-400 text-cyan-400 rounded-full transition-all duration-150 hover:bg-cyan-400 hover:text-black hover:scale-105 active:scale-95 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+            className="btn btn-outline"
+            style={{ 
+                padding: '0.85rem 2rem', 
+                fontSize: '1rem', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center', 
+                gap: '0.75rem',
+                flex: '1 1 200px',
+                borderRadius: '12px',
+                backgroundColor: bg,
+                color: color,
+                border: `1px solid var(--color-border)`,
+                fontWeight: 600
+            }}
         >
-            <span className="transition-transform duration-150 ease-in-out group-hover:-translate-y-1">
-                {icon}
-            </span>
+            {icon}
             <span>{text}</span>
         </a>
     );
 };
 
-
 const Contact: React.FC = () => {
-    const [titleRef, isVisible] = useIntersectionObserver<HTMLHeadingElement>({ threshold: 0.2 });
-
-    const contactLinks = [
-        { href: 'mailto:rahulkilaparthi7@gmail.com', icon: <MailIcon className="w-6 h-6" />, text: 'Email Me', delay: '100ms' },
-        { href: 'https://www.linkedin.com/in/kilaparthi-rahul-63b13a293', icon: <LinkedInIcon className="w-6 h-6" />, text: 'LinkedIn', delay: '200ms' },
-        { href: 'https://github.com/Rahulkilaparthi', icon: <GitHubIcon className="w-6 h-6" />, text: 'GitHub', delay: '300ms' },
+    const contactLinks: ContactLink[] = [
+        { href: 'mailto:rahulkilaparthi7@gmail.com', icon: <MailIcon style={{ width: '20px', height: '20px' }} />, text: 'Email Me', color: 'var(--color-primary)', bg: 'rgba(37, 99, 235, 0.04)' },
+        { href: 'https://www.linkedin.com/in/kilaparthi-rahul-63b13a293', icon: <LinkedInIcon style={{ width: '20px', height: '20px' }} />, text: 'LinkedIn', color: 'var(--color-accent)', bg: 'rgba(124, 58, 237, 0.04)' },
+        { href: 'https://github.com/Rahulkilaparthi', icon: <GitHubIcon style={{ width: '20px', height: '20px' }} />, text: 'GitHub', color: '#0f172a', bg: '#f8fafc' },
     ];
 
     return (
-        <section className="py-20 bg-black bg-opacity-20">
-            <div className="container mx-auto px-6">
-                <h2 ref={titleRef} className={`font-orbitron text-4xl md:text-5xl font-bold text-center mb-16 transition-opacity duration-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-                    <span className="text-purple-500 neon-text-purple">{'<'}</span>
-                    Contact Me
-                    <span className="text-purple-500 neon-text-purple">{'/>'}</span>
-                </h2>
-                <div className="max-w-4xl mx-auto flex flex-col md:flex-row flex-wrap items-center justify-center gap-8">
-                   {contactLinks.map(link => (
-                       <ContactButton key={link.text} {...link} />
-                   ))}
+        <section className="section" id="contact" style={{ backgroundColor: 'var(--bg-secondary)', borderTop: '1px solid var(--color-border)' }}>
+            <div className="container" style={{ maxWidth: '800px' }}>
+                <div className="section-title">
+                    <h2>Get In Touch</h2>
+                    <p className="section-subtitle">Interested in collaborating or discussing security, software development, or bug bounty work? Drop me a message.</p>
                 </div>
-                 <p className="text-center text-gray-400 mt-16 max-w-xl mx-auto">
-                    Feel free to reach out through any of these channels. I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.
-                </p>
+
+                <div 
+                    className="card"
+                    style={{
+                        padding: '3rem 2rem',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        gap: '2rem',
+                        border: '1px solid var(--color-border)',
+                        textAlign: 'center',
+                        boxShadow: 'var(--shadow-md)'
+                    }}
+                >
+                    <h3 style={{ fontSize: '1.5rem', fontWeight: 700, margin: 0, fontFamily: 'var(--font-heading)', color: 'var(--text-main)' }}>
+                        Let's build something secure together
+                    </h3>
+                    
+                    <p style={{ fontSize: '1rem', color: 'var(--text-secondary)', lineHeight: 1.6, maxWidth: '600px', margin: 0 }}>
+                        I'm always open to discussing new projects, auditing web apps, exploring job opportunities, or simply exchanging ideas about modern cybersecurity.
+                    </p>
+
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', width: '100%', justifyContent: 'center' }}>
+                       {contactLinks.map((link, idx) => (
+                           <ContactButton key={idx} {...link} />
+                       ))}
+                    </div>
+                </div>
             </div>
         </section>
     );
 };
 
-export default React.memo(Contact);
+export default Contact;

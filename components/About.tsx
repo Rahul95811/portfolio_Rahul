@@ -1,114 +1,66 @@
-
 import React from 'react';
-import useIntersectionObserver from '../hooks/useIntersectionObserver';
 
-const SectionTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-    <h2 className="font-orbitron text-4xl md:text-5xl font-bold text-center mb-12">
-        <span className="text-cyan-400 neon-text-cyan">{'<'}</span>
-        {children}
-        <span className="text-cyan-400 neon-text-cyan">{'/>'}</span>
-    </h2>
-);
-
-const ExperienceCard: React.FC<{ title: string, company: string, period: string, description: string[], delay?: string }> = ({ title, company, period, description, delay }) => {
-    // FIX: Specified the element type for the useIntersectionObserver hook.
-    const [ref, isVisible] = useIntersectionObserver<HTMLDivElement>({ threshold: 0.1 });
+const EducationCard: React.FC<{ institution: string, degree: string, period: string, grade: string }> = ({ institution, degree, period, grade }) => {
     return (
-        <div ref={ref} className={`glass-effect p-6 rounded-xl border border-purple-500/30 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`} style={{ transitionDelay: delay || '0ms' }}>
-            <h3 className="text-2xl font-bold text-cyan-400">{title}</h3>
-            <p className="text-purple-400 font-semibold mb-2">{company} | {period}</p>
-            <ul className="list-disc list-inside text-gray-300 space-y-2">
-                {description.map((item, index) => <li key={index}>{item}</li>)}
-            </ul>
-        </div>
-    );
-};
-
-const EducationCard: React.FC<{ institution: string, degree: string, period: string, grade: string, delay?: string }> = ({ institution, degree, period, grade, delay }) => {
-    // FIX: Specified the element type for the useIntersectionObserver hook.
-    const [ref, isVisible] = useIntersectionObserver<HTMLDivElement>({ threshold: 0.1 });
-    return (
-        <div ref={ref} className={`glass-effect p-6 rounded-xl border border-cyan-500/30 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`} style={{ transitionDelay: delay || '0ms' }}>
-            <h3 className="text-2xl font-bold text-purple-400">{institution}</h3>
-            <p className="text-cyan-400 font-semibold mb-2">{degree} | {period}</p>
-            <p className="text-gray-300">{grade}</p>
+        <div className="card" style={{ padding: '1.5rem', border: '1px solid var(--color-border)', marginBottom: '1.25rem', display: 'flex', gap: '1rem', alignItems: 'center' }}>
+            <div style={{ background: 'rgba(124, 58, 237, 0.08)', color: 'var(--color-accent)', width: '48px', height: '48px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ margin: 'auto' }}><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/></svg>
+            </div>
+            <div style={{ flexGrow: 1 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '0.25rem' }}>
+                    <h4 style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--text-main)', margin: 0 }}>{institution}</h4>
+                    <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>{period}</span>
+                </div>
+                <p style={{ fontSize: '0.9rem', color: 'var(--color-primary)', fontWeight: 500, margin: '0.15rem 0' }}>{degree}</p>
+                <div className="badge badge-primary" style={{ fontSize: '0.75rem', marginTop: '0.25rem' }}>{grade}</div>
+            </div>
         </div>
     );
 }
 
 const About: React.FC = () => {
-    // FIX: Specified the element type for the useIntersectionObserver hook.
-    const [ref, isVisible] = useIntersectionObserver<HTMLDivElement>({ threshold: 0.1 });
     return (
-        <section className="py-20 container mx-auto px-6">
-            <SectionTitle>About Me</SectionTitle>
-            <div ref={ref} className={`text-center max-w-3xl mx-auto mb-16 transition-opacity duration-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-                <p className="text-lg text-gray-300 leading-relaxed">
-                    I am a passionate and self-driven cybersecurity enthusiast with hands-on experience in ethical hacking, network security, and bug bounty hunting. Currently pursuing my B.Tech in Computer Science, I am dedicated to exploring the vast landscape of cybersecurity and developing robust solutions to complex security challenges.
-                </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div>
-                    <h3 className="font-orbitron text-3xl font-bold mb-6 text-center text-purple-400 neon-text-purple">Experience</h3>
-                    <div className="space-y-6">
-                        <ExperienceCard
-                            title="Cybersecurity Intern"
-                            company="Teachnook"
-                            period="Aug 2024 - Sep 2024"
-                            description={[
-                                "Gained hands-on experience in cybersecurity principles.",
-                                "Worked on ethical hacking, network security, and threat detection.",
-                                "Completed various cybersecurity challenges and case studies."
-                            ]}
-                            delay="100ms"
-                        />
-                        <ExperienceCard
-                            title="Bug Bounty Hunter"
-                            company="Self-Driven"
-                            period="2024 - Present"
-                            description={[
-                                "Identified and responsibly disclosed an HTML Injection vulnerability on a high-traffic Premier League football club website.",
-                                "Identified and disclosed HTML Injection, XSS, CSRF, and SQL Injection vulnerabilities.",
-                                "Practiced testing for security flaws using tools like Burp Suite."
-                            ]}
-                            delay="200ms"
-                        />
-                        <ExperienceCard
-                            title="Cybersecurity Enthusiast"
-                            company="Independent"
-                            period="2021 - Present"
-                            description={[
-                                "Explored Wi-Fi penetration testing, phishing simulations, and DDoS attack models.",
-                                "Practiced ethical hacking using Kali Linux in lab environments."
-                            ]}
-                            delay="300ms"
-                        />
-                    </div>
+        <section className="section" id="about" style={{ backgroundColor: 'var(--bg-secondary)', borderTop: '1px solid var(--color-border)', borderBottom: '1px solid var(--color-border)' }}>
+            <div className="container">
+                <div className="section-title">
+                    <h2>About Me</h2>
+                    <p className="section-subtitle">A balanced developer & cybersecurity enthusiast building modern, highly secure digital products.</p>
                 </div>
-                <div>
-                    <h3 className="font-orbitron text-3xl font-bold mb-6 text-center text-cyan-400 neon-text-cyan">Education</h3>
-                    <div className="space-y-6">
+
+                <div className="grid grid-cols-1 md-grid-cols-2" style={{ gap: '4rem', alignItems: 'start' }}>
+                    {/* Left Column: Summary & Goals */}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                        <div className="card" style={{ padding: '2.5rem', background: 'linear-gradient(135deg, #ffffff, #f8fafc)' }}>
+                            <h3 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '1rem', fontFamily: 'var(--font-heading)' }}>Professional Summary</h3>
+                            <p style={{ color: 'var(--text-secondary)', fontSize: '1rem', lineHeight: '1.7', marginBottom: '1.5rem' }}>
+                                I am a passionate and self-driven cybersecurity enthusiast with hands-on experience in ethical hacking, network security, and bug bounty hunting. Currently pursuing my B.Tech in Computer Science, I am dedicated to exploring the vast landscape of cybersecurity and developing robust solutions to complex security challenges.
+                            </p>
+                            <p style={{ color: 'var(--text-secondary)', fontSize: '1rem', lineHeight: '1.7' }}>
+                                My goal is to build secure, scalable applications by integrating proactive defense and modern secure-coding methodologies directly into full stack workflows.
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* Right Column: Education Timeline */}
+                    <div>
+                        <h3 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '1.5rem', fontFamily: 'var(--font-heading)' }}>Education</h3>
                         <EducationCard
-                            institution="Gitam University"
+                            institution="GITAM University"
                             degree="B.Tech Computer Science and Engineering"
                             period="2023 - 2027"
                             grade="CGPA - 8.87"
-                            delay="100ms"
                         />
                         <EducationCard
-                            institution="Sri Gayatri Jr Collage"
+                            institution="Sri Gayatri Jr College"
                             degree="Intermediate"
                             period="2021 - 2023"
-                            grade="Percentage - 90.1"
-                            delay="200ms"
+                            grade="Percentage - 90.1%"
                         />
                         <EducationCard
                             institution="DR KKR Gowtham School"
                             degree="Schooling (SSC)"
                             period="2020 - 2021"
                             grade="Percentage - 96%"
-                            delay="300ms"
                         />
                     </div>
                 </div>
@@ -117,4 +69,4 @@ const About: React.FC = () => {
     );
 };
 
-export default React.memo(About);
+export default About;

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 
 const BackToTopButton: React.FC = () => {
@@ -28,16 +27,44 @@ const BackToTopButton: React.FC = () => {
     return (
         <button
             onClick={scrollToTop}
-            className={`fixed bottom-8 right-8 z-50 p-3 rounded-full bg-cyan-500/80 text-black backdrop-blur-sm border border-cyan-400/50 shadow-lg transition-all duration-150 btn-glow hover:scale-110 focus:outline-none ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
+            style={{
+                position: 'fixed',
+                bottom: '2rem',
+                right: '2rem',
+                zIndex: 50,
+                padding: '0.75rem',
+                borderRadius: '9999px',
+                backgroundColor: 'rgba(255, 255, 255, 0.8)',
+                color: 'var(--color-primary)',
+                backdropFilter: 'blur(8px)',
+                border: '1px solid var(--color-border)',
+                boxShadow: 'var(--shadow-md)',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                opacity: isVisible ? 1 : 0,
+                transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
+                pointerEvents: isVisible ? 'auto' : 'none',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+            }}
+            onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'scale(1.1)';
+                e.currentTarget.style.backgroundColor = 'var(--bg-secondary)';
+                e.currentTarget.style.boxShadow = 'var(--shadow-lg)';
+            }}
+            onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'scale(1)';
+                e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
+                e.currentTarget.style.boxShadow = 'var(--shadow-md)';
+            }}
             aria-label="Go to top"
         >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+            <svg xmlns="http://www.w3.org/2000/svg" style={{ width: '20px', height: '20px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 15l7-7 7 7" />
             </svg>
         </button>
     );
 };
 
-export default React.memo(BackToTopButton);
+export default BackToTopButton;
