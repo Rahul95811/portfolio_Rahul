@@ -7,7 +7,7 @@ export default defineConfig(({ mode }) => {
     return {
       // If you deploy to GitHub Pages under a repo (not user/org page),
       // set VITE_BASE to "/your-repo-name/" in the workflow or env.
-      base: '/portfolio-kilaparthi-rahul/',
+      base: '/portfolio/',
       server: {
         port: 3000,
         host: '0.0.0.0',
