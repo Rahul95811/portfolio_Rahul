@@ -8,7 +8,7 @@ const Hero: React.FC = () => {
 
     return (
         <section className="section" style={{ minHeight: '90vh', display: 'flex', alignItems: 'center', paddingTop: '8rem', position: 'relative', overflow: 'hidden' }}>
-            <div className="container" style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: '3rem', alignItems: 'center' }} className="flex-col-md">
+            <div className="container flex-col-md" style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: '3rem', alignItems: 'center' }}>
                 {/* Left Side: Professional Intro */}
                 <div className="fade-in" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', textAlign: 'left', zIndex: 2 }}>
                     <div style={{ display: 'inline-flex', alignSelf: 'flex-start', alignItems: 'center', gap: '0.5rem', padding: '0.35rem 1rem', borderRadius: '9999px', background: 'rgba(37, 99, 235, 0.08)', border: '1px solid rgba(37, 99, 235, 0.15)' }}>
